@@ -1,0 +1,7 @@
+# Archivos de configuración y caché del editor de código
+.vscode/
+*.swp
+.DS_Store
+
+# Variables de entorno local (NUNCA deben subirse a GitHub)
+.env

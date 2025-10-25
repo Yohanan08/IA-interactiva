@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca Torá - Contenido con IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary-color: #0077cc;
+    --primary-dark: #005fa3;
+    --secondary-color: #f0f0f0;
+    --background-light: #f8f8f8;
+    --text-color: #333;
+    --card-bg: white;
+    --shadow-light: rgba(0,0,0,0.1);
+    --shadow-medium: rgba(0,0,0,0.2);
+    --font-heading: 'Merriweather', serif;
+    --font-body: 'Open Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 20px;
+    background: var(--background-light);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+
+  h1, h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .inicio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+  }
+  .inicio-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .filter-container {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .filter-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .filter-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  .filter-btn.active {
+    background: var(--primary-dark);
+    box-shadow: 0 2px 5px var(--shadow-medium);
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px var(--shadow-medium);
+  }
+  .card h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    text-align: left;
+  }
+  .card p {
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  .ia-container {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    max-width: 800px;
+    margin: 0 auto 60px;
+  }
+  .ia-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    min-height: 80px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 119, 204, 0.3);
+  }
+
+  .ia-button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    border: none;
+    /* border-radius: 5px;  <-- Quitamos este para el ovalado */
+    border-radius: 50px; /* Hacemos el botón ovalado */
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-size: 1.05rem;
+    font-weight: 600;
+    
+    /* Para centrar el icono y el texto */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio entre icono y texto */
+  }
+  .ia-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  .ia-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .ia-button svg {
+    fill: white; /* Color del icono */
+    width: 18px;
+    height: 18px;
+  }
+
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0,0,0,.1);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  @keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+
+  /* Estilos para el historial de preguntas */
+  .history-container {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    max-width: 800px;
+    margin: 40px auto 60px;
+  }
+
+  .history-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+  }
+
+  #historyList {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fdfdfd;
+  }
+
+  .history-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    border-left: 5px solid var(--primary-color);
+    position: relative;
+    padding-right: 40px;
+  }
+
+  .history-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .history-item p {
+    margin: 0 0 5px 0;
+    color: #333;
+  }
+
+  .history-item .question {
+    font-weight: 600;
+  }
+
+  .history-item .answer {
+    font-style: italic;
+    color: #555;
+    font-size: 0.95em;
+  }
+
+  .clear-history-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+  }
+
+  .clear-history-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+  }
+
+  .delete-item-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 1.2em;
+    line-height: 1;
+    padding: 0 5px;
+    transition: color 0.2s ease;
+  }
+
+  .delete-item-btn:hover {
+    color: #dc3545;
+  }
+
+
+  /* Media Queries para responsividad */
+  @media (max-width: 768px) {
+    body {
+      padding: 15px;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    .card-container {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .filter-btn {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+    .ia-container, .history-container {
+      padding: 20px;
+    }
+    .ia-container h2, .history-container h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+    .inicio-btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+    .filter-container {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .filter-btn {
+      width: 100%;
+      margin: 0;
+    }
+    .card-container {
+      grid-template-columns: 1fr;
+    }
+    .history-item {
+      padding: 10px 10px 10px 15px;
+      border-left-width: 3px;
+    }
+    .delete-item-btn {
+      font-size: 1em;
+      top: 2px;
+      right: 2px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Biblioteca Torá</h1>
+
+  <!-- Filtros de categoría -->
+  <div class="filter-container">
+    <button class="filter-btn active" data-category="Todos" aria-label="Mostrar todos los contenidos">Todos</button>
+    <button class="filter-btn" data-category="Torá" aria-label="Mostrar contenidos de Torá">Torá</button>
+    <button class="filter-btn" data-category="Profecías" aria-label="Mostrar contenidos de Profecías">Profecías</button>
+    <button class="filter-btn" data-category="Salmos" aria-label="Mostrar contenidos de Salmos">Salmos</button>
+    <button class="filter-btn" data-category="Fiestas" aria-label="Mostrar contenidos de Fiestas">Fiestas</button>
+    <button class="filter-btn" data-category="Estudios" aria-label="Mostrar contenidos de Estudios">Estudios</button>
+  </div>
+
+  <!-- Tarjetas -->
+  <div class="card-container" id="cards"></div>
+
+  <!-- Contenedor de IA -->
+  <div class="ia-container">
+    <h2>Pregunta y descubre lo maravilloso que es ver al Mashiaj Yeshúa en las Escrituras</h2>
+    <textarea id="pregunta" rows="4" placeholder="Ej: ¿Cuál es el significado de Pésaj? ¿Puedes darme un resumen de la Parashá Bereshit? ¿Qué salmo habla sobre la venida del Mashíaj?" aria-label="Campo de texto para tu pregunta a la IA"></textarea>
+    <button id="enviar" class="ia-button" aria-label="Enviar pregunta a la IA">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+      <span>Preguntar</span>
+    </button>
+    <div id="respuesta" aria-live="polite">Aquí aparecerá la respuestas.</div>
+  </div>
+
+  <!-- Historial de Preguntas y Respuestas -->
+  <div class="history-container">
+    <h2>Historial</h2>
+    <div id="historyList">
+      <!-- Aquí se irán añadiendo las preguntas y respuestas -->
+      <p style="text-align: center; color: #777;">No hay preguntas en el historial todavía.</p>
+    </div>
+    <button id="clearHistory" class="clear-history-btn" aria-label="Borrar todo el historial de preguntas">Borrar Historial Completo</button>
+  </div>
+</div>
+
+<script>
+  // Datos de contenido con links
+  const contenido = [
+    {
+      "titulo": "Parashot Semanales",
+      "descripcion": "Explora las 54 parashot y su enseñanza en la luz de Yeshúa HaMashíaj.",
+      "categoria": "Torá",
+      "link": "https://bibliotecatora.vercel.app/"
+    },
+    {
+      "titulo": "Profecías Mesiánicas",
+      "descripcion": "Estudios sobre cómo la Torá anuncia al Mashíaj.",
+      "categoria": "Profecías",
+      "link": "https://bibliotecatora.vercel.app/Profesias-de-las-parashot/profesias-de-las-parashot.html"
+    },
+    {
+      "titulo": "Salmos del Rey David",
+      "descripcion": "Análisis de los salmos y su cumplimiento en el Mashíaj Yeshúa.",
+      "categoria": "Salmos",
+      "link": "https://bibliotecatora.vercel.app/salmosdelmashiaj.html"
+    },
+    {
+      "titulo": "Fiestas del Eterno",
+      "descripcion": "Estudios sobre las festividades judías y su cumplimiento en Yeshúa.",
+      "categoria": "Fiestas",
+      "link": "https://bibliotecatora.vercel.app/Fiestas%20del%20Eterno/Fiestas.html"
+    },
+    {
+      "titulo": "Estudios a la luz del Mashiaj Judio Adonai Yeshúa Hamashiaj",
+      "descripcion": "Estudios a la luz del Mashiaj Judio y su cumplimiento en Yeshúa.",
+      "categoria": "Estudios",
+      "link": "https://bibliotecatora.vercel.app/Estudios-a-la-Luz-del-Mashiaj/EstudiosalaluzdelmashiajYeshua.html"
+    }
+  ];
+
+  const cardsContainer = document.getElementById('cards');
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const enviarBtn = document.getElementById('enviar');
+  const preguntaInput = document.getElementById('pregunta');
+  const respuestaDiv = document.getElementById('respuesta');
+  const historyList = document.getElementById('historyList');
+  const clearHistoryBtn = document.getElementById('clearHistory');
+
+  let history = JSON.parse(localStorage.getItem('iaHistory')) || [];
+
+  function mostrarTarjetas(data) {
+    cardsContainer.innerHTML = '';
+    if (data.length === 0) {
+      cardsContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: #777;">No se encontraron contenidos para esta categoría.</p>';
+      return;
+    }
+    data.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <a href="${item.link}" style="text-decoration: none; color: inherit; display: block;">
+          <h2>${item.titulo}</h2>
+          <p>${item.descripcion}</p>
+        </a>
+      `;
+      cardsContainer.appendChild(card);
+    });
+  }
+
+  function filtrar(categoria) {
+    filterButtons.forEach(btn => {
+      if (btn.dataset.category === categoria) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    if (categoria === 'Todos') {
+      mostrarTarjetas(contenido);
+    } else {
+      const filteredContent = contenido.filter(item => item.categoria === categoria);
+      mostrarTarjetas(filteredContent);
+    }
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const categoria = button.dataset.category;
+      filtrar(categoria);
+    });
+  });
+
+  mostrarTarjetas(contenido);
+
+  // ==== Módulo de IA ====
+  enviarBtn.addEventListener('click', async () => {
+    const pregunta = preguntaInput.value.trim();
+    if (!pregunta) {
+      respuestaDiv.innerHTML = "Por favor, escribe una pregunta antes de enviar.";
+      return;
+    }
+
+    const originalButtonContent = enviarBtn.innerHTML;
+    preguntaInput.value = '';
+    enviarBtn.disabled = true;
+    enviarBtn.innerHTML = `Preguntando... <span class="loading-spinner"></span>`;
+    respuestaDiv.innerHTML = "Cargando respuesta...";
+
+    // -----------------------------------------------------------------
+    // --- SOLUCIÓN SEGURA ---
+    // Ahora llamamos a nuestra propia API en /api/preguntar,
+    // que se encargará de llamar a Google de forma segura.
+    // -----------------------------------------------------------------
+    
+    try {
+      const response = await fetch('/api/preguntar', { // <-- Llamamos a nuestra API
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          pregunta: pregunta // Enviamos solo la pregunta
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Error: ${errorData.error}`);
+      }
+
+      const data = await response.json();
+      const respuestaIA = data.respuesta; // Nuestra API nos da la respuesta directamente
+
+      // Convertimos Markdown simple a HTML
+      const respuestaHtml = respuestaIA
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n/g, '<br>');
+
+      respuestaDiv.innerHTML = respuestaHtml;
+      addHistoryItem(pregunta, respuestaHtml);
+
+    } catch (error) {
+      console.error("Error al obtener respuesta de la IA:", error);
+      respuestaDiv.innerHTML = `Lo siento, hubo un error al obtener la respuesta: ${error.message}. Inténtalo de nuevo.`;
+    } finally {
+      enviarBtn.disabled = false;
+      enviarBtn.innerHTML = originalButtonContent;
+    }
+  });
+
+  // ===================================
+  // ==== FIN: Módulo de IA (MODIFICADO Y SEGURO) ====
+  // ===================================
+
+  // ==== Funcionalidad de Historial ====
+
+  function renderHistory() {
+    historyList.innerHTML = '';
+    if (history.length === 0) {
+      historyList.innerHTML = '<p style="text-align: center; color: #777;">No hay preguntas en el historial todavía.</p>';
+      return;
+    }
+    // Para asegurar que los índices sean correctos al borrar, mejor renderizar y luego adjuntar listeners
+    // Invertimos el array para que lo más reciente esté arriba
+    const reversedHistory = [...history].reverse(); 
+    reversedHistory.forEach((item, index) => {
+      const historyItem = document.createElement('div');
+      historyItem.className = 'history-item';
+      historyItem.innerHTML = `
+        <button class="delete-item-btn" data-actual-index="${history.length - 1 - index}" aria-label="Borrar esta pregunta y respuesta del historial">&times;</button>
+        <p class="question"><strong>Pregunta:</strong> ${item.question}</p>
+        <p class="answer"><strong>Respuesta:</strong> ${item.answer}</p>
+      `;
+      historyList.appendChild(historyItem); // Usar appendChild ya que el array está invertido
+    });
+  }
+
+  function addHistoryItem(question, answer) {
+    history.push({ question, answer, timestamp: new Date().toLocaleString() });
+    localStorage.setItem('iaHistory', JSON.stringify(history));
+    renderHistory();
+  }
+
+  // Borrar un elemento individual del historial
+  historyList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete-item-btn')) {
+      // El data-actual-index ya nos da el índice correcto en el array 'history'
+      const indexToDelete = parseInt(event.target.dataset.actualIndex);
+      history.splice(indexToDelete, 1);
+      localStorage.setItem('iaHistory', JSON.stringify(history));
+      renderHistory(); // Volver a renderizar todo el historial para actualizar los índices
+    }
+  });
+
+  clearHistoryBtn.addEventListener('click', () => {
+    if (confirm('¿Estás seguro de que quieres borrar todo el historial de preguntas?')) {
+      history = [];
+      localStorage.removeItem('iaHistory');
+      renderHistory();
+    }
+  });
+
+  renderHistory();
+</script>
+
+</body>
+</html>
