@@ -16,7 +16,7 @@ export default async function handler(request, response) {
     return response.status(500).json({ error: 'API Key no configurada en el servidor' });
   }
 
-  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
   const promptConContexto = `
     Eres un asistente virtual para la "Biblioteca Torá". 
