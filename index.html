@@ -387,6 +387,12 @@
       <span>Preguntar</span>
     </button>
     <div id="respuesta" aria-live="polite">Aquí aparecerá la respuestas.</div>
+    <button id="compartirRespuesta" class="ia-button" style="margin-top:15px; display:none;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a2.5 2.5 0 0 0 0-1.39l7.02-4.11A2.5 2.5 0 1 0 14.5 5a2.5 2.5 0 0 0 2.45 3.11c.76 0 1.44-.3 1.96-.77l7.02 4.11a2.5 2.5 0 0 0 0 1.39l-7.02 4.11A2.5 2.5 0 1 0 18 16.08z"/>
+  </svg>
+  Compartir respuesta
+</button>
   </div>
 
   <!-- Historial de Preguntas y Respuestas -->
@@ -423,7 +429,7 @@
     },
     {
       "titulo": "Fiestas del Eterno",
-      "descripcion": "Estudios sobre las festividades judías y su cumplimiento en Yeshúa.",
+      "descripcion": "Estudios sobre las fiestas de Adonai y su cumplimiento en el Mashiaj Yeshúa.",
       "categoria": "Fiestas",
       "link": "https://bibliotecatora.vercel.app/Fiestas%20del%20Eterno/Fiestas.html"
     },
@@ -537,6 +543,27 @@
 
       respuestaDiv.innerHTML = respuestaHtml;
       addHistoryItem(pregunta, respuestaHtml);
+
+      // Mostrar el botón de compartir solo si hay respuesta
+const compartirBtn = document.getElementById('compartirRespuesta');
+compartirBtn.style.display = 'inline-block';
+
+// Guardamos el texto de la respuesta para compartir
+compartirBtn.onclick = async () => {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Respuesta de la Biblioteca Yeshúa la Torá viviente',
+        text: respuestaDiv.innerText,
+        url: window.location.href,
+      });
+    } catch (err) {
+      console.error('Error al compartir:', err);
+    }
+  } else {
+    alert('La función de compartir no es compatible con tu navegador.');
+  }
+};
 
     } catch (error) {
       console.error("Error al obtener respuesta de la IA:", error);
