@@ -138,6 +138,32 @@
     margin-bottom: 20px;
   }
 
+  .preguntas-sugeridas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.pregunta-btn {
+  background: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.pregunta-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
   textarea {
     width: 100%;
     padding: 12px;
@@ -379,7 +405,12 @@
   <!-- Contenedor de IA -->
   <div class="ia-container">
     <h2>Pregunta y descubre lo maravilloso que es ver al Mashiaj Yeshúa en las Escrituras</h2>
-    <textarea id="pregunta" rows="4" placeholder="Ej: ¿Cuál es el significado de Pésaj? ¿Puedes darme un resumen de la Parashá Bereshit? ¿Qué salmo habla sobre la venida del Mashíaj?" aria-label="Campo de texto para tu pregunta a la IA"></textarea>
+    <div class="preguntas-sugeridas">
+  <button class="pregunta-btn">¿Cuál es el significado de Pésaj?</button>
+  <button class="pregunta-btn">¿Puedes darme un resumen de la Parashá Bereshit?</button>
+  <button class="pregunta-btn">¿Qué salmo habla sobre la venida del Mashíaj?</button>
+</div>
+    <textarea id="pregunta" rows="4" placeholder="Escribe aquí tu pregunta..." aria-label="Campo de texto para tu pregunta a la IA"></textarea>
     <button id="enviar" class="ia-button" aria-label="Enviar pregunta a la IA">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
         <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
@@ -495,6 +526,15 @@
   });
 
   mostrarTarjetas(contenido);
+
+  // === FUNCIONALIDAD DE PREGUNTAS SUGERIDAS ===
+document.querySelectorAll('.pregunta-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const pregunta = btn.textContent;
+    preguntaInput.value = pregunta; // la muestra en el textarea
+    enviarBtn.click(); // simula el envío para que la IA responda automáticamente
+  });
+});
 
   // ==== Módulo de IA ====
   enviarBtn.addEventListener('click', async () => {
@@ -619,12 +659,10 @@ compartirBtn.onclick = async () => {
   });
 
   clearHistoryBtn.addEventListener('click', () => {
-    if (confirm('¿Estás seguro de que quieres borrar todo el historial de preguntas?')) {
-      history = [];
-      localStorage.removeItem('iaHistory');
-      renderHistory();
-    }
-  });
+  history = [];
+  localStorage.removeItem('iaHistory');
+  renderHistory();
+});
 
   renderHistory();
 </script>
