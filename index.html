@@ -1,332 +1,480 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biblioteca Yeshúa la toraviviente</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca Yeshúa la toraviviente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Biblioteca Judío mesianica Yeshúa la toraviviente</h1>
 
-<div class="container">
-  <h1>Biblioteca Judío mesianica Yeshúa la toraviviente</h1>
+      <!-- Filtros de categoría -->
+      <div class="filter-container">
+        <button
+          class="filter-btn active"
+          data-category="Todos"
+          aria-label="Mostrar todos los contenidos"
+        >
+          Todos
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Torá"
+          aria-label="Mostrar contenidos de Torá"
+        >
+          Torá
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Torà"
+          aria-label="Mostrar interacción"
+        >
+          Parashot Mesiánicas
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Profecías"
+          aria-label="Mostrar contenidos de Profecías"
+        >
+          Profecías
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Salmos"
+          aria-label="Mostrar contenidos de Salmos"
+        >
+          Salmos
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Fiestas"
+          aria-label="Mostrar contenidos de Fiestas"
+        >
+          Fiestas
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Estudios"
+          aria-label="Mostrar contenidos de Estudios"
+        >
+          Estudios
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Januka"
+          aria-label="Mostrar contenidos de Januka"
+        >
+          Januka
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Purim"
+          aria-label="Mostrar contenidos de Purim"
+        >
+          Purim
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Yeshúa la Toraviviente"
+          aria-label="Mostrar estudios"
+        >
+          Yeshúa la Toraviviente | Torá Mesiánica
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Guía experta en Torá"
+          aria-label="Mostrar interacción"
+        >
+          Torá de Estudio
+        </button>
+        <button
+          class="filter-btn"
+          data-category="Salmos"
+          aria-label="Mostrar interacción"
+        >
+          Salmos Mesiánicos – Tehilim del Mashíaj Yeshúa
+        </button>
+      </div>
 
-  <!-- Filtros de categoría -->
-  <div class="filter-container">
-    <button class="filter-btn active" data-category="Todos" aria-label="Mostrar todos los contenidos">Todos</button>
-    <button class="filter-btn" data-category="Torá" aria-label="Mostrar contenidos de Torá">Torá</button>
-    <button class="filter-btn" data-category="Profecías" aria-label="Mostrar contenidos de Profecías">Profecías</button>
-    <button class="filter-btn" data-category="Salmos" aria-label="Mostrar contenidos de Salmos">Salmos</button>
-    <button class="filter-btn" data-category="Fiestas" aria-label="Mostrar contenidos de Fiestas">Fiestas</button>
-    <button class="filter-btn" data-category="Estudios" aria-label="Mostrar contenidos de Estudios">Estudios</button>
-    <button class="filter-btn" data-category="Januka" aria-label="Mostrar contenidos de Januka">Januka</button>
-    <button class="filter-btn" data-category="Purim" aria-label="Mostrar contenidos de Purim">Purim</button>
-    <button class="filter-btn" data-category="Yeshúa la Toraviviente" aria-label="Mostrar estudios">Yeshúa la Toraviviente | Torá Mesiánica</button>
-    <button class="filter-btn" data-category="Guía experta en Torá" aria-label="Mostrar interacción">Torá de Estudio</button>
-    <button class="filter-btn" data-category="Salmos" aria-label="Mostrar interacción">Salmos Mesiánicos – Tehilim del Mashíaj Yeshúa</button>
-  </div>
+      <!-- Tarjetas -->
+      <div class="card-container" id="cards"></div>
 
-  <!-- Tarjetas -->
-  <div class="card-container" id="cards"></div>
+      <!-- Contenedor de IA -->
+      <div class="ia-container">
+        <h2>
+          Pregunta y descubre lo maravilloso que es ver al Mashiaj Yeshúa en las
+          Escrituras
+        </h2>
+        <div class="preguntas-sugeridas">
+          <button class="pregunta-btn">
+            ¿Cuál es el significado de Pésaj?
+          </button>
+          <button class="pregunta-btn">
+            ¿Puedes darme un resumen de la Parashá Bereshit?
+          </button>
+          <button class="pregunta-btn">
+            ¿Qué salmo habla sobre la venida del Mashíaj?
+          </button>
+          <button class="pregunta-btn">
+            ¿Cuál es la verdadera hístoria de Januka?
+          </button>
+        </div>
+        <textarea
+          id="pregunta"
+          rows="4"
+          placeholder="Escribe aquí tu pregunta..."
+          aria-label="Campo de texto para tu pregunta a la IA"
+        ></textarea>
+        <button
+          id="enviar"
+          class="ia-button"
+          aria-label="Enviar pregunta a la IA"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+          >
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+          </svg>
+          <span>Preguntar</span>
+        </button>
+        <div id="respuesta" aria-live="polite">
+          Aquí aparecerá la respuestas.
+        </div>
+        <button
+          id="compartirRespuesta"
+          class="ia-button"
+          style="margin-top: 15px; display: none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a2.5 2.5 0 0 0 0-1.39l7.02-4.11A2.5 2.5 0 1 0 14.5 5a2.5 2.5 0 0 0 2.45 3.11c.76 0 1.44-.3 1.96-.77l7.02 4.11a2.5 2.5 0 0 0 0 1.39l-7.02 4.11A2.5 2.5 0 1 0 18 16.08z"
+            />
+          </svg>
+          Compartir respuesta
+        </button>
+      </div>
 
-  <!-- Contenedor de IA -->
-  <div class="ia-container">
-    <h2>Pregunta y descubre lo maravilloso que es ver al Mashiaj Yeshúa en las Escrituras</h2>
-    <div class="preguntas-sugeridas">
-  <button class="pregunta-btn">¿Cuál es el significado de Pésaj?</button>
-  <button class="pregunta-btn">¿Puedes darme un resumen de la Parashá Bereshit?</button>
-  <button class="pregunta-btn">¿Qué salmo habla sobre la venida del Mashíaj?</button>
-  <button class="pregunta-btn">¿Cuál es la verdadera hístoria de Januka?</button>
-</div>
-    <textarea id="pregunta" rows="4" placeholder="Escribe aquí tu pregunta..." aria-label="Campo de texto para tu pregunta a la IA"></textarea>
-    <button id="enviar" class="ia-button" aria-label="Enviar pregunta a la IA">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
-        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-      </svg>
-      <span>Preguntar</span>
-    </button>
-    <div id="respuesta" aria-live="polite">Aquí aparecerá la respuestas.</div>
-    <button id="compartirRespuesta" class="ia-button" style="margin-top:15px; display:none;">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
-    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a2.5 2.5 0 0 0 0-1.39l7.02-4.11A2.5 2.5 0 1 0 14.5 5a2.5 2.5 0 0 0 2.45 3.11c.76 0 1.44-.3 1.96-.77l7.02 4.11a2.5 2.5 0 0 0 0 1.39l-7.02 4.11A2.5 2.5 0 1 0 18 16.08z"/>
-  </svg>
-  Compartir respuesta
-</button>
-  </div>
-
-  <!-- Historial de Preguntas y Respuestas -->
-  <div class="history-container">
-    <h2>Historial</h2>
-    <div id="historyList">
-      <!-- Aquí se irán añadiendo las preguntas y respuestas -->
-      <p style="text-align: center; color: #777;">No hay preguntas en el historial todavía.</p>
+      <!-- Historial de Preguntas y Respuestas -->
+      <div class="history-container">
+        <h2>Historial</h2>
+        <div id="historyList">
+          <!-- Aquí se irán añadiendo las preguntas y respuestas -->
+          <p style="text-align: center; color: #777">
+            No hay preguntas en el historial todavía.
+          </p>
+        </div>
+        <button
+          id="clearHistory"
+          class="clear-history-btn"
+          aria-label="Borrar todo el historial de preguntas"
+        >
+          Borrar Historial Completo
+        </button>
+      </div>
     </div>
-    <button id="clearHistory" class="clear-history-btn" aria-label="Borrar todo el historial de preguntas">Borrar Historial Completo</button>
-  </div>
-</div>
 
-<script>
-  // Datos de contenido con links
-  const contenido = [
-    {
-      "titulo": "Parashot Semanales",
-      "descripcion": "Explora las 54 parashot y su enseñanza en la luz de Yeshúa HaMashíaj.",
-      "categoria": "Torá",
-      "link": "https://bibliotecatora.vercel.app/"
-    },
-    {
-      "titulo": "Profecías Mesiánicas",
-      "descripcion": "Estudios sobre cómo la Torá anuncia al Mashíaj.",
-      "categoria": "Profecías",
-      "link": "https://bibliotecatora.vercel.app/Profesias-de-las-parashot/profesias-de-las-parashot.html"
-    },
-    {
-      "titulo": "Salmos del Rey David",
-      "descripcion": "Análisis de los salmos y su cumplimiento en el Mashíaj Yeshúa.",
-      "categoria": "Salmos",
-      "link": "https://bibliotecatora.vercel.app/salmosdelmashiaj.html"
-    },
-    {
-      "titulo": "Fiestas del Eterno",
-      "descripcion": "Estudios sobre las fiestas de Adonai y su cumplimiento en el Mashiaj Yeshúa.",
-      "categoria": "Fiestas",
-      "link": "https://bibliotecatora.vercel.app/Fiestas%20del%20Eterno/Fiestas.html"
-    },
-    {
-      "titulo": "Estudios a la luz del Mashiaj Judio Adonai Yeshúa Hamashiaj",
-      "descripcion": "Estudios a la luz del Mashiaj Judio y su cumplimiento en Yeshúa.",
-      "categoria": "Estudios",
-      "link": "https://bibliotecatora.vercel.app/Estudios-a-la-Luz-del-Mashiaj/EstudiosalaluzdelmashiajYeshua.html"
-    },
-    {
-      "titulo": "Januka la fiesta de la dedicación",
-      "descripcion": "La verdadera dedicación por medio de nuestro Adonai Yeshúa Hamashiaj.",
-      "categoria": "Januka",
-      "link": "https://januka.vercel.app/"
-    },
-    {
-      "titulo": "Purim y la victoria por medio de nuestro Adonai Yeshúa Hamashiaj",
-      "descripcion": "El Decreto de Muerte y la Sustitución en el Madero: Un Análisis Teológico y Profético de Purim.",
-      "categoria": "Purim",
-      "link": "https://purim-app-iota.vercel.app/"
-    },
-    {
-      "titulo": "Yeshúa la Toraviviente | Torá Mesiánica",
-      "descripcion": "Te invitamos a profundizar en la Torá, los Profetas y el Brit Hadashah, contemplando el cumplimiento de las Escrituras en Yeshúa HaMashíaj.",
-      "categoria": "Yeshúa la Toraviviente",
-      "link": "https://chatgpt.com/g/g-69af0b05c8448191a5ba37e05813ad0b-yeshua-la-toraviviente-tora-mesianica"
-    },
-    {
-      "titulo": "Yeshúa la Toraviviente de Estudio",
-      "descripcion": "Guía experta en Torá, Fiestas del Eterno y el Brit Hadashá, interpretados bajo la luz de Yeshúa HaMashiaj.",
-      "categoria": "Guía experta en Torá",
-      "link": "https://gemini.google.com/gem/310786cce7ad"
-    },
-    {
-      "titulo": "Salmos Mesiánicos – Tehilim del Mashíaj Yeshúa",
-      "descripcion": "Descubriendo cómo cada salmo revela la obra del Mashíaj Yeshúa.",
-      "categoria": "Salmos",
-      "link": "https://chatgpt.com/g/g-69b37541c18481919cb13231ddfdb7cf-salmos-mesianicos"
-    }
-  ];
+    <script>
+      // Datos de contenido con links
+      const contenido = [
+        {
+          titulo: "Parashot Semanales",
+          descripcion:
+            "Explora las 54 parashot y su enseñanza en la luz de Yeshúa HaMashíaj.",
+          categoria: "Torá",
+          link: "https://bibliotecatora.vercel.app/",
+        },
+        {
+          titulo: "Parashot Mesiánicas",
+          descripcion:
+            "Estudio de las 54 Parashot que revela al Mashíaj e integra el contexto del Segundo Templo, Qumrán, Targumim y el cumplimiento profético.",
+          categoria: "Torá",
+          link: "https://chatgpt.com/g/g-69beeee7767081919ab9ccc3cdf68faa-parashot-mesianicas",
+        },
+        {
+          titulo: "Profecías Mesiánicas",
+          descripcion: "Estudios sobre cómo la Torá anuncia al Mashíaj.",
+          categoria: "Profecías",
+          link: "https://bibliotecatora.vercel.app/Profesias-de-las-parashot/profesias-de-las-parashot.html",
+        },
+        {
+          titulo: "Salmos del Rey David",
+          descripcion:
+            "Análisis de los salmos y su cumplimiento en el Mashíaj Yeshúa.",
+          categoria: "Salmos",
+          link: "https://bibliotecatora.vercel.app/salmosdelmashiaj.html",
+        },
+        {
+          titulo: "Fiestas del Eterno",
+          descripcion:
+            "Estudios sobre las fiestas de Adonai y su cumplimiento en el Mashiaj Yeshúa.",
+          categoria: "Fiestas",
+          link: "https://bibliotecatora.vercel.app/Fiestas%20del%20Eterno/Fiestas.html",
+        },
+        {
+          titulo: "Estudios a la luz del Mashiaj Judio Adonai Yeshúa Hamashiaj",
+          descripcion:
+            "Estudios a la luz del Mashiaj Judio y su cumplimiento en Yeshúa.",
+          categoria: "Estudios",
+          link: "https://bibliotecatora.vercel.app/Estudios-a-la-Luz-del-Mashiaj/EstudiosalaluzdelmashiajYeshua.html",
+        },
+        {
+          titulo: "Januka la fiesta de la dedicación",
+          descripcion:
+            "La verdadera dedicación por medio de nuestro Adonai Yeshúa Hamashiaj.",
+          categoria: "Januka",
+          link: "https://januka.vercel.app/",
+        },
+        {
+          titulo:
+            "Purim y la victoria por medio de nuestro Adonai Yeshúa Hamashiaj",
+          descripcion:
+            "El Decreto de Muerte y la Sustitución en el Madero: Un Análisis Teológico y Profético de Purim.",
+          categoria: "Purim",
+          link: "https://purim-app-iota.vercel.app/",
+        },
+        {
+          titulo: "Yeshúa la Toraviviente | Torá Mesiánica",
+          descripcion:
+            "Te invitamos a profundizar en la Torá, los Profetas y el Brit Hadashah, contemplando el cumplimiento de las Escrituras en Yeshúa HaMashíaj.",
+          categoria: "Yeshúa la Toraviviente",
+          link: "https://chatgpt.com/g/g-69af0b05c8448191a5ba37e05813ad0b-yeshua-la-toraviviente-tora-mesianica",
+        },
+        {
+          titulo: "Yeshúa la Toraviviente de Estudio",
+          descripcion:
+            "Guía experta en Torá, Fiestas del Eterno y el Brit Hadashá, interpretados bajo la luz de Yeshúa HaMashiaj.",
+          categoria: "Guía experta en Torá",
+          link: "https://gemini.google.com/gem/310786cce7ad",
+        },
+        {
+          titulo: "Salmos Mesiánicos – Tehilim del Mashíaj Yeshúa",
+          descripcion:
+            "Descubriendo cómo cada salmo revela la obra del Mashíaj Yeshúa.",
+          categoria: "Salmos",
+          link: "https://chatgpt.com/g/g-69b37541c18481919cb13231ddfdb7cf-salmos-mesianicos",
+        },
+      ];
 
-  const cardsContainer = document.getElementById('cards');
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const enviarBtn = document.getElementById('enviar');
-  const preguntaInput = document.getElementById('pregunta');
-  const respuestaDiv = document.getElementById('respuesta');
-  const historyList = document.getElementById('historyList');
-  const clearHistoryBtn = document.getElementById('clearHistory');
+      const cardsContainer = document.getElementById("cards");
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const enviarBtn = document.getElementById("enviar");
+      const preguntaInput = document.getElementById("pregunta");
+      const respuestaDiv = document.getElementById("respuesta");
+      const historyList = document.getElementById("historyList");
+      const clearHistoryBtn = document.getElementById("clearHistory");
 
-  let history = JSON.parse(localStorage.getItem('iaHistory')) || [];
+      let history = JSON.parse(localStorage.getItem("iaHistory")) || [];
 
-  function mostrarTarjetas(data) {
-    cardsContainer.innerHTML = '';
-    if (data.length === 0) {
-      cardsContainer.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: #777;">No se encontraron contenidos para esta categoría.</p>';
-      return;
-    }
-    data.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
+      function mostrarTarjetas(data) {
+        cardsContainer.innerHTML = "";
+        if (data.length === 0) {
+          cardsContainer.innerHTML =
+            '<p style="text-align: center; grid-column: 1 / -1; color: #777;">No se encontraron contenidos para esta categoría.</p>';
+          return;
+        }
+        data.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
         <a href="${item.link}" style="text-decoration: none; color: inherit; display: block;">
           <h2>${item.titulo}</h2>
           <p>${item.descripcion}</p>
         </a>
       `;
-      cardsContainer.appendChild(card);
-    });
-  }
-
-  function filtrar(categoria) {
-    filterButtons.forEach(btn => {
-      if (btn.dataset.category === categoria) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
+          cardsContainer.appendChild(card);
+        });
       }
-    });
 
-    if (categoria === 'Todos') {
+      function filtrar(categoria) {
+        filterButtons.forEach((btn) => {
+          if (btn.dataset.category === categoria) {
+            btn.classList.add("active");
+          } else {
+            btn.classList.remove("active");
+          }
+        });
+
+        if (categoria === "Todos") {
+          mostrarTarjetas(contenido);
+        } else {
+          const filteredContent = contenido.filter(
+            (item) => item.categoria === categoria,
+          );
+          mostrarTarjetas(filteredContent);
+        }
+      }
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const categoria = button.dataset.category;
+          filtrar(categoria);
+        });
+      });
+
       mostrarTarjetas(contenido);
-    } else {
-      const filteredContent = contenido.filter(item => item.categoria === categoria);
-      mostrarTarjetas(filteredContent);
-    }
-  }
 
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const categoria = button.dataset.category;
-      filtrar(categoria);
-    });
-  });
-
-  mostrarTarjetas(contenido);
-
-  // === FUNCIONALIDAD DE PREGUNTAS SUGERIDAS ===
-document.querySelectorAll('.pregunta-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    const pregunta = btn.textContent;
-    preguntaInput.value = pregunta; // la muestra en el textarea
-    enviarBtn.click(); // simula el envío para que la IA responda automáticamente
-  });
-});
-
-  // ==== Módulo de IA ====
-  enviarBtn.addEventListener('click', async () => {
-    const pregunta = preguntaInput.value.trim();
-    if (!pregunta) {
-      respuestaDiv.innerHTML = "Por favor, escribe una pregunta antes de enviar.";
-      return;
-    }
-
-    const originalButtonContent = enviarBtn.innerHTML;
-    preguntaInput.value = '';
-    enviarBtn.disabled = true;
-    enviarBtn.innerHTML = `Preguntando... <span class="loading-spinner"></span>`;
-    respuestaDiv.innerHTML = "Cargando respuesta...";
-
-    // -----------------------------------------------------------------
-    // --- SOLUCIÓN SEGURA ---
-    // Ahora llamamos a nuestra propia API en /api/preguntar,
-    // que se encargará de llamar a Google de forma segura.
-    // -----------------------------------------------------------------
-    
-    try {
-      const response = await fetch('/api/preguntar', { // <-- Llamamos a nuestra API
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          pregunta: pregunta // Enviamos solo la pregunta
-        }),
+      // === FUNCIONALIDAD DE PREGUNTAS SUGERIDAS ===
+      document.querySelectorAll(".pregunta-btn").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const pregunta = btn.textContent;
+          preguntaInput.value = pregunta; // la muestra en el textarea
+          enviarBtn.click(); // simula el envío para que la IA responda automáticamente
+        });
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`Error: ${errorData.error}`);
-      }
+      // ==== Módulo de IA ====
+      enviarBtn.addEventListener("click", async () => {
+        const pregunta = preguntaInput.value.trim();
+        if (!pregunta) {
+          respuestaDiv.innerHTML =
+            "Por favor, escribe una pregunta antes de enviar.";
+          return;
+        }
 
-      const data = await response.json();
-      const respuestaIA = data.respuesta; // Nuestra API nos da la respuesta directamente
+        const originalButtonContent = enviarBtn.innerHTML;
+        preguntaInput.value = "";
+        enviarBtn.disabled = true;
+        enviarBtn.innerHTML = `Preguntando... <span class="loading-spinner"></span>`;
+        respuestaDiv.innerHTML = "Cargando respuesta...";
 
-      // Convertimos Markdown simple a HTML
-      const respuestaHtml = respuestaIA
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/\n/g, '<br>');
+        // -----------------------------------------------------------------
+        // --- SOLUCIÓN SEGURA ---
+        // Ahora llamamos a nuestra propia API en /api/preguntar,
+        // que se encargará de llamar a Google de forma segura.
+        // -----------------------------------------------------------------
 
-      respuestaDiv.innerHTML = respuestaHtml;
-      addHistoryItem(pregunta, respuestaHtml);
+        try {
+          const response = await fetch("/api/preguntar", {
+            // <-- Llamamos a nuestra API
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              pregunta: pregunta, // Enviamos solo la pregunta
+            }),
+          });
 
-      // Mostrar el botón de compartir solo si hay respuesta
-const compartirBtn = document.getElementById('compartirRespuesta');
-compartirBtn.style.display = 'inline-block';
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Error: ${errorData.error}`);
+          }
 
-// Guardamos el texto de la respuesta para compartir
-compartirBtn.onclick = async () => {
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: 'Respuesta de la Biblioteca Yeshúa la Torá viviente',
-        text: respuestaDiv.innerText,
-        url: window.location.href,
+          const data = await response.json();
+          const respuestaIA = data.respuesta; // Nuestra API nos da la respuesta directamente
+
+          // Convertimos Markdown simple a HTML
+          const respuestaHtml = respuestaIA
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\*(.*?)\*/g, "<em>$1</em>")
+            .replace(/\n/g, "<br>");
+
+          respuestaDiv.innerHTML = respuestaHtml;
+          addHistoryItem(pregunta, respuestaHtml);
+
+          // Mostrar el botón de compartir solo si hay respuesta
+          const compartirBtn = document.getElementById("compartirRespuesta");
+          compartirBtn.style.display = "inline-block";
+
+          // Guardamos el texto de la respuesta para compartir
+          compartirBtn.onclick = async () => {
+            if (navigator.share) {
+              try {
+                await navigator.share({
+                  title: "Respuesta de la Biblioteca Yeshúa la Torá viviente",
+                  text: respuestaDiv.innerText,
+                  url: window.location.href,
+                });
+              } catch (err) {
+                console.error("Error al compartir:", err);
+              }
+            } else {
+              alert(
+                "La función de compartir no es compatible con tu navegador.",
+              );
+            }
+          };
+        } catch (error) {
+          console.error("Error al obtener respuesta de la IA:", error);
+          respuestaDiv.innerHTML = `Lo siento, hubo un error al obtener la respuesta: ${error.message}. Inténtalo de nuevo.`;
+        } finally {
+          enviarBtn.disabled = false;
+          enviarBtn.innerHTML = originalButtonContent;
+        }
       });
-    } catch (err) {
-      console.error('Error al compartir:', err);
-    }
-  } else {
-    alert('La función de compartir no es compatible con tu navegador.');
-  }
-};
 
-    } catch (error) {
-      console.error("Error al obtener respuesta de la IA:", error);
-      respuestaDiv.innerHTML = `Lo siento, hubo un error al obtener la respuesta: ${error.message}. Inténtalo de nuevo.`;
-    } finally {
-      enviarBtn.disabled = false;
-      enviarBtn.innerHTML = originalButtonContent;
-    }
-  });
+      // ===================================
+      // ==== FIN: Módulo de IA (MODIFICADO Y SEGURO) ====
+      // ===================================
 
-  // ===================================
-  // ==== FIN: Módulo de IA (MODIFICADO Y SEGURO) ====
-  // ===================================
+      // ==== Funcionalidad de Historial ====
 
-  // ==== Funcionalidad de Historial ====
-
-  function renderHistory() {
-    historyList.innerHTML = '';
-    if (history.length === 0) {
-      historyList.innerHTML = '<p style="text-align: center; color: #777;">No hay preguntas en el historial todavía.</p>';
-      return;
-    }
-    // Para asegurar que los índices sean correctos al borrar, mejor renderizar y luego adjuntar listeners
-    // Invertimos el array para que lo más reciente esté arriba
-    const reversedHistory = [...history].reverse(); 
-    reversedHistory.forEach((item, index) => {
-      const historyItem = document.createElement('div');
-      historyItem.className = 'history-item';
-      historyItem.innerHTML = `
+      function renderHistory() {
+        historyList.innerHTML = "";
+        if (history.length === 0) {
+          historyList.innerHTML =
+            '<p style="text-align: center; color: #777;">No hay preguntas en el historial todavía.</p>';
+          return;
+        }
+        // Para asegurar que los índices sean correctos al borrar, mejor renderizar y luego adjuntar listeners
+        // Invertimos el array para que lo más reciente esté arriba
+        const reversedHistory = [...history].reverse();
+        reversedHistory.forEach((item, index) => {
+          const historyItem = document.createElement("div");
+          historyItem.className = "history-item";
+          historyItem.innerHTML = `
         <button class="delete-item-btn" data-actual-index="${history.length - 1 - index}" aria-label="Borrar esta pregunta y respuesta del historial">&times;</button>
         <p class="question"><strong>Pregunta:</strong> ${item.question}</p>
         <p class="answer"><strong>Respuesta:</strong> ${item.answer}</p>
       `;
-      historyList.appendChild(historyItem); // Usar appendChild ya que el array está invertido
-    });
-  }
+          historyList.appendChild(historyItem); // Usar appendChild ya que el array está invertido
+        });
+      }
 
-  function addHistoryItem(question, answer) {
-    history.push({ question, answer, timestamp: new Date().toLocaleString() });
-    localStorage.setItem('iaHistory', JSON.stringify(history));
-    renderHistory();
-  }
+      function addHistoryItem(question, answer) {
+        history.push({
+          question,
+          answer,
+          timestamp: new Date().toLocaleString(),
+        });
+        localStorage.setItem("iaHistory", JSON.stringify(history));
+        renderHistory();
+      }
 
-  // Borrar un elemento individual del historial
-  historyList.addEventListener('click', (event) => {
-    if (event.target.classList.contains('delete-item-btn')) {
-      // El data-actual-index ya nos da el índice correcto en el array 'history'
-      const indexToDelete = parseInt(event.target.dataset.actualIndex);
-      history.splice(indexToDelete, 1);
-      localStorage.setItem('iaHistory', JSON.stringify(history));
-      renderHistory(); // Volver a renderizar todo el historial para actualizar los índices
-    }
-  });
+      // Borrar un elemento individual del historial
+      historyList.addEventListener("click", (event) => {
+        if (event.target.classList.contains("delete-item-btn")) {
+          // El data-actual-index ya nos da el índice correcto en el array 'history'
+          const indexToDelete = parseInt(event.target.dataset.actualIndex);
+          history.splice(indexToDelete, 1);
+          localStorage.setItem("iaHistory", JSON.stringify(history));
+          renderHistory(); // Volver a renderizar todo el historial para actualizar los índices
+        }
+      });
 
-  clearHistoryBtn.addEventListener('click', () => {
-  history = [];
-  localStorage.removeItem('iaHistory');
-  renderHistory();
-});
+      clearHistoryBtn.addEventListener("click", () => {
+        history = [];
+        localStorage.removeItem("iaHistory");
+        renderHistory();
+      });
 
-  renderHistory();
-</script>
-
-</body>
+      renderHistory();
+    </script>
+  </body>
 </html>
