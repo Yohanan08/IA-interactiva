@@ -14,94 +14,54 @@
   </head>
   <body>
     <div class="container">
+      <div class="hero-logo">
+        <img src="./logo/image(64).png" alt="logo" />
+      </div>
       <h1>Biblioteca Judío mesianica Yeshúa la toraviviente</h1>
+      <p class="subtitulo">
+        Ministerio Judío Mesiánico • Estudios de Torá • Salmos • Profecías
+      </p>
 
-      <!-- Filtros de categoría -->
-      <div class="filter-container">
-        <button
-          class="filter-btn active"
-          data-category="Todos"
-          aria-label="Mostrar todos los contenidos"
-        >
-          Todos
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Torá"
-          aria-label="Mostrar contenidos de Torá"
-        >
-          Torá
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Torà"
-          aria-label="Mostrar interacción"
-        >
-          Parashot Mesiánicas
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Profecías"
-          aria-label="Mostrar contenidos de Profecías"
-        >
-          Profecías
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Salmos"
-          aria-label="Mostrar contenidos de Salmos"
-        >
-          Salmos
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Fiestas"
-          aria-label="Mostrar contenidos de Fiestas"
-        >
-          Fiestas
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Estudios"
-          aria-label="Mostrar contenidos de Estudios"
-        >
-          Estudios
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Januka"
-          aria-label="Mostrar contenidos de Januka"
-        >
-          Januka
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Purim"
-          aria-label="Mostrar contenidos de Purim"
-        >
-          Purim
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Yeshúa la Toraviviente"
-          aria-label="Mostrar estudios"
-        >
-          Yeshúa la Toraviviente | Torá Mesiánica
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Guía experta en Torá"
-          aria-label="Mostrar interacción"
-        >
-          Torá de Estudio
-        </button>
-        <button
-          class="filter-btn"
-          data-category="Salmos"
-          aria-label="Mostrar interacción"
-        >
-          Salmos Mesiánicos – Tehilim del Mashíaj Yeshúa
-        </button>
+      <!-- MENÚ HAMBURGUESA -->
+      <div class="menu-container">
+        <button class="menu-toggle" id="menuToggle">☰ Menú Biblioteca</button>
+
+        <!-- Filtros -->
+        <div class="filter-container" id="menuContent">
+          <button class="filter-btn active" data-category="Todos">Todos</button>
+
+          <button class="filter-btn" data-category="Torá">Torá</button>
+
+          <button class="filter-btn" data-category="Torà">
+            Parashot Mesiánicas
+          </button>
+
+          <button class="filter-btn" data-category="Profecías">
+            Profecías
+          </button>
+
+          <button class="filter-btn" data-category="Salmos">Salmos</button>
+
+          <button class="filter-btn" data-category="Fiestas">Fiestas</button>
+
+          <button class="filter-btn" data-category="Estudios">Estudios</button>
+
+          <button class="filter-btn" data-category="Januka">Januka</button>
+
+          <button class="filter-btn" data-category="Purim">Purim</button>
+
+          <button class="filter-btn" data-category="Yeshúa la Toraviviente">
+            Yeshúa la Toraviviente | Torá Mesiánica
+          </button>
+
+          <button class="filter-btn" data-category="Guía experta en Torá">
+            Torá de Estudio
+          </button>
+
+          <button class="filter-btn" data-category="Salmos">
+            Salmos Mesiánicos – Tehilim del Mashíaj Yeshúa
+          </button>
+        </div>
       </div>
 
       <!-- Tarjetas -->
@@ -475,6 +435,12 @@
       });
 
       renderHistory();
+      const menuToggle = document.getElementById("menuToggle");
+      const menuContent = document.getElementById("menuContent");
+
+      menuToggle.addEventListener("click", () => {
+        menuContent.classList.toggle("open");
+      });
     </script>
   </body>
 </html>
